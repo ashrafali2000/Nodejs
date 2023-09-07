@@ -1,14 +1,18 @@
 const express = require("express");
+const bodyParser = require("body-parser");
+
 const app = express();
 
+const form = require("./routes/form")
+
+app.use(bodyParser.urlencoded({extended:false}));
+app.use(bodyParser.json())
+
 app.use((req, res, next) => {  //Auth midleware
-    // console.log(req.url);
     req.data = "Ashraf";
- next();
+    next();
 })
 
-app.use((req, res, next) => {
- res.send(req.data)
-})
+app.use("/form", form);
 
 app.listen(3000);
