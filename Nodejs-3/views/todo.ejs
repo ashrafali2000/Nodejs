@@ -6,6 +6,13 @@
     <title>Todo Ejs</title>
 </head>
 <body>
-   
+   <div>
+    <ul>
+        <% for (var i = 0; i < todos.length; i++) { %>
+        <li><input type="checkbox" /><%=  todos[i].name %></li>
+        <% } %>
+        
+    </ul>
+   </div>
 </body>
 </html>
