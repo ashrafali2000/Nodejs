@@ -11,9 +11,8 @@ app.use(bodyParser.json())
 app.use(express.static(path.join(process.cwd(), "public")))
 
 // As a localStorage
-app.set("name" , "ashraf");
-app.get("name");
-console.log(app.get("name"));
+app.set("view engine", "ejs");
+app.set("views", "views")
 
 app.use((req, res, next) => {  //Auth midleware
     req.data = "Ashraf";
