@@ -28,12 +28,21 @@ exports.createUser = async(email, password, userId) => {
   try{
       const users =  await readData();
      const matched = users.find(u => u.email === email)
-     if(matched){
-        throw new Error ("user already exist")
+     if(!!matched){
+        return "user already exist";
      }else{
-    
     await writeData([...users, {email, password, userId}])
+    return "user created sucessfully"
      }
+  } catch(err){
+   throw err;
+  }
+}
+exports.findUser = async(email) => {
+  try{
+      const users =  await readData();
+     const matched = users.find(u => u.email === email)
+     return matched;
   } catch(err){
    throw err;
   }
