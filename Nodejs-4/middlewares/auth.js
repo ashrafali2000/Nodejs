@@ -1,7 +1,11 @@
+const { SECRETE_KEY } = require("../data/key");
+const jwt = require('jsonwebtoken');
 exports.varify = (req, res, next) => {
-    if(req.headers.token){
-       next()
-    }else{
-       res.send("Authentication failed");
-    }
+       jwt.verify(req.headers.token, SECRETE_KEY,function(err, decoded) {
+      if(err){
+         return res.send("Authentication failed")
+      }
+      req.user = decoded.email
+      next()
+    });
    }
