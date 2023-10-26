@@ -1,5 +1,8 @@
-const { createUser, findUser } = require("../models/user");
 const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
+const { createUser, findUser } = require("../models/user");
+const { SECRETE_KEY } = require('../data/key');
+
 exports.createUser = async (email, password) => {
   try {
     const userId = Date.now();
@@ -14,7 +17,9 @@ exports.login = async (email, password) => {
     const user = await findUser(email);
     const result =  await bcrypt.compare(password, !!user && user.password);
     if(result){
-        return "login sucessfull"
+        const token = jwt.sign({ email },SECRETE_KEY, { expiresIn: '1h' } );
+        return {token};
+        // return "login sucessfull"
     }
     return "wrong email id or Password"
   } catch (err) {
