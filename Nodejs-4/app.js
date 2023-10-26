@@ -6,6 +6,7 @@ const app = express();
 
 const form = require("./routes/form")
 const todo = require("./routes/todo")
+const auth = require("./routes/auth")
 
 app.use(bodyParser.urlencoded({extended:false}));
 app.use(bodyParser.json())
@@ -22,5 +23,6 @@ app.use((req, res, next) => {  //Auth midleware
 
 app.use("/todo", todo);
 app.use("/form", form);
+app.use("/auth", auth);
 
 app.listen(3000);
