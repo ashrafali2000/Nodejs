@@ -4,7 +4,7 @@ const router = express.Router();
 
 router.get("/", (req, res) => {
     // in the bellow the first argument ("todo") is represent the todo.ejs file
-    res.send({todos: getAllTodos()});
+    res.send({user:req.user,todos: getAllTodos()});
 })
 
 router.post("/add", (req, res) => {
