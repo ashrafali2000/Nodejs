@@ -24,14 +24,14 @@ const writeData = (data) => {
       });
 };
 
-exports.createUser = async(email, password, userId) => {
+exports.createUser = async(firstName, lastName, email, password, userId) => {
   try{
       const users =  await readData();
      const matched = users.find(u => u.email === email)
      if(!!matched){
         return "user already exist";
      }else{
-    await writeData([...users, {email, password, userId}])
+    await writeData([...users, {firstName, lastName, email, password, userId}])
     return "user created sucessfully"
      }
   } catch(err){

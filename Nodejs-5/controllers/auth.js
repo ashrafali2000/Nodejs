@@ -3,11 +3,11 @@ const jwt = require('jsonwebtoken');
 const { createUser, findUser } = require("../models/user");
 const { SECRETE_KEY } = require('../data/key');
 
-exports.createUser = async (email, password) => {
+exports.createUser = async (firstName, lastName, email, password) => {
   try {
     const userId = Date.now();
     const hashPassword = await bcrypt.hash(password, 12)
-    return await createUser(email, hashPassword, userId);
+    return await createUser(firstName, lastName, email, hashPassword, userId);
   } catch (err) {
     throw err;
   }
