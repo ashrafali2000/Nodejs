@@ -6,7 +6,8 @@ const app = express();
 
 const form = require("./routes/form")
 const todo = require("./routes/todo")
-const auth = require("./routes/auth")
+const auth = require("./routes/auth");
+const { varify } = require("./middlewares/auth");
 
 app.use(bodyParser.urlencoded({extended:false}));
 app.use(bodyParser.json())
@@ -21,7 +22,7 @@ app.use((req, res, next) => {  //Auth midleware
     next();
 })
 
-app.use("/todo", todo);
+app.use("/todo", varify, todo);
 app.use("/form", form);
 app.use("/auth", auth);
 
